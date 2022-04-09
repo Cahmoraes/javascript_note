@@ -1,8 +1,11 @@
 import './App.scss'
+import Routing from './routes'
 
 function App() {
   return (
-    <div></div>
+    <>
+      <Routing />
+    </>
   )
 }
 
