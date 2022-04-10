@@ -1,5 +1,6 @@
 import { Container, Column, Section, Title, Card } from 'rbx'
 import Header from '../../../components/header'
+import RegisterForm from '../../../components/auth/register_form'
 
 import '../../../styles/auth.scss'
 import logoImage from '../../../assets/images/logo.png'
@@ -26,6 +27,7 @@ const Register = () => (
                       </Title>
                     </Column>
                   </Column.Group>
+                  <RegisterForm />
                 </Section>
               </Card.Content>
             </Card>
