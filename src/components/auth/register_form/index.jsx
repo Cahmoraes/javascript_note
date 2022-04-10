@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Field, Control, Input, Column, Section, Help, Label } from "rbx"
 import { Navigate } from "react-router-dom"
+import UsersService from '../../../services/users'
 
 function RegisterForm() {
   const [name, setName] = useState("")
@@ -9,6 +10,16 @@ function RegisterForm() {
   const [redirectToLogin, setRedirectToLogin] = useState(false)
   const [error, setError] = useState(false)
 
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    try {
+      const user = await UsersService.register({ name, email, password })
+      setRedirectToLogin(true)
+    } catch (error) {
+      setError(true)
+    }
+  }
+
   if (redirectToLogin) {
     return <Navigate to={{ pathname: '/login' }} />
   }
@@ -16,7 +27,7 @@ function RegisterForm() {
   return (
     <>
       <Column.Group centered>
-        <form>
+        <form onSubmit={handleSubmit}>
           <Column size={12}>
             <Field>
               <Label size="small">Name:</Label>
@@ -58,10 +69,10 @@ function RegisterForm() {
               <Control>
                 <Column.Group breakpoint="mobile">
                   <Column>
-                    <a 
+                    <a
                       className="button is-white has-text-custom-purple"
                       onClick={() => setRedirectToLogin(true)}
-                      >Login or</a>
+                    >Login or</a>
                   </Column>
                   <Column>
                     <Button color="custom-purple" outlined>Register</Button>
